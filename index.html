@@ -35,11 +35,45 @@
         </li>
       </ul>
 
+      <hr>
+      <h5>Vue Method</h5>
+
+      <div >Price: {{price}}</div>
+      <input type="text" v-model="price">
+      <button @click="">Calculate</button>
+      <div>Tax: {{ moneyFormat(tax)}}</div>
+      <div>Total: {{ moneyFormat(calculateTotal) }}</div>
+
+      <hr>
+      <h5>Basic Vue Component</h5>
+      <accordian v-for="worker in workers" :worker="worker">
+
+      </accordian>
+
+
 
 
   </div>
 
     <script>
+
+      Vue.component('accordian', {
+        props: ["worker"],
+        template: `
+        <div>
+          <p>{{ worker.name }}</p>
+          <button @click="toggleDescription = ! toggleDescription">Details</button>
+          <p v-if="toggleDescription">{{ worker.description }}</p>
+        </div>
+        `,
+        data: function () {
+          return {
+            toggleDescription: false
+          }
+        }
+      })
+
+
     new Vue({
       el: '#app',
       data: {
@@ -55,7 +89,27 @@
           {text: 'One', checked: true},
           { text: 'Two', checked: true },
           { text: 'Three', checked: false },
+        ],
+        price: 100,
+        workers: [
+          {name: "Ken", description: "Ken is cool."},
+          { name: "Glen", description: "Glen is ten." },
+          { name: "Suzie", description: "Suzie is a doozy." },
+          { name: "Beth", description: "Beth is the harbringer of Death." },
         ]
+      },
+      computed: {
+        tax: function () {
+          return this.price * 0.12
+        },
+        calculateTotal: function () {
+          return parseInt(this.price) + this.tax
+        }
+      },
+      methods: {
+        moneyFormat: function (price) {
+            return "$" + price
+        }
       }
 
     });
@@ -65,55 +119,3 @@
 
   </html>
 
-
-<!-- 
-
-  <!DOCTYPE html>
-  <html lang="en">
-  
-  <head>
-    <meta charset="UTF-8">
-    <title>Vue</title>
-  </head>
-  
-  <body>
-  
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  
-  
-    <div id="app">
-      <h1 v-bind:title="Menu">
-        {{title}}
-      </h1>
-  
-      <ul>
-        <li v-for="todo in items">{{todo}}</li>
-      </ul>
-  
-  
-  
-      <input type="text" v-model="item">
-      <button @click="items.push(item)">Add Item</button>
-  
-  
-    </div>
-  
-    <script>
-      new Vue({
-        el: '#app',
-        data: {
-          title: "Vue Do",
-          item: "",
-          items: [
-            "item 1",
-            "item 2",
-            "item 3"
-          ],
-        }
-
-      });
-    </script>
-  
-  </body>
-  
-  </html> -->
