@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+  </head>
+
+  <body>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+  <div id="app">
+      <h1 v-bind:title="Menu">
+        {{title}}
+      </h1>
+
+      <h3 v-if="isVisible">Concition ONE</h3>
+      <h3 v-else="isVisible">Condiction TWO</h3>
+
+      <ul>
+        <li v-for="todoItem in items">{{todoItem}}</li>
+      </ul>
+      <input type="text" v-model="item">
+      <button @click="items.push(item)">Add a Vue DO</button>
+
+      <ul>
+        <li v-for="thing in things">
+          {{ thing.text }}
+          <div v-if="thing.checked">
+            Checked!!
+          </div>
+          <div v-else="thing.checked">NOT Checked...</div>
+          <button @click="thing.checked = ! thing.checked">Click Me...</button>
+        </li>
+      </ul>
+
+
+
+  </div>
+
+    <script>
+    new Vue({
+      el: '#app',
+      data: {
+        title: "Vue Do",
+        item: "",
+        items: [
+          "item 1",
+          "item 2",
+          "item 3"
+        ],
+        isVisible: false,
+        things: [
+          {text: 'One', checked: true},
+          { text: 'Two', checked: true },
+          { text: 'Three', checked: false },
+        ]
+      }
+
+    });
+    </script>
+
+  </body>
+
+  </html>
+
+
+<!-- 
+
+  <!DOCTYPE html>
+  <html lang="en">
+  
+  <head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+  </head>
+  
+  <body>
+  
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  
+  
+    <div id="app">
+      <h1 v-bind:title="Menu">
+        {{title}}
+      </h1>
+  
+      <ul>
+        <li v-for="todo in items">{{todo}}</li>
+      </ul>
+  
+  
+  
+      <input type="text" v-model="item">
+      <button @click="items.push(item)">Add Item</button>
+  
+  
+    </div>
+  
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          title: "Vue Do",
+          item: "",
+          items: [
+            "item 1",
+            "item 2",
+            "item 3"
+          ],
+        }
+
+      });
+    </script>
+  
+  </body>
+  
+  </html> -->
