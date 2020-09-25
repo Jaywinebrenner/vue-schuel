@@ -7,11 +7,11 @@
 
   <body>
 
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
 
 
   <div id="app">
-      <h1 v-bind:title="Menu">
+      <h1>
         {{title}}
       </h1>
 
@@ -46,74 +46,28 @@
 
       <hr>
       <h5>Basic Vue Component</h5>
-      <accordian v-for="worker in workers" :worker="worker">
+      
+      <accordian v-for="worker in workers" :key="worker.id" :worker="worker">
 
       </accordian>
+      <hr>
+      <h5>Nested Component</h5>
 
+      <list></list>
+      <br>
+      <h4>API call</h4>
+      <ul>
+        <li v-for="post in posts" v-text="post.title">
 
+        </li>
+      </ul>
 
 
   </div>
 
-    <script>
-
-      Vue.component('accordian', {
-        props: ["worker"],
-        template: `
-        <div>
-          <p>{{ worker.name }}</p>
-          <button @click="toggleDescription = ! toggleDescription">Details</button>
-          <p v-if="toggleDescription">{{ worker.description }}</p>
-        </div>
-        `,
-        data: function () {
-          return {
-            toggleDescription: false
-          }
-        }
-      })
+  <script src="./dist/app.js"></script>
 
 
-    new Vue({
-      el: '#app',
-      data: {
-        title: "Vue Do",
-        item: "",
-        items: [
-          "item 1",
-          "item 2",
-          "item 3"
-        ],
-        isVisible: false,
-        things: [
-          {text: 'One', checked: true},
-          { text: 'Two', checked: true },
-          { text: 'Three', checked: false },
-        ],
-        price: 100,
-        workers: [
-          {name: "Ken", description: "Ken is cool."},
-          { name: "Glen", description: "Glen is ten." },
-          { name: "Suzie", description: "Suzie is a doozy." },
-          { name: "Beth", description: "Beth is the harbringer of Death." },
-        ]
-      },
-      computed: {
-        tax: function () {
-          return this.price * 0.12
-        },
-        calculateTotal: function () {
-          return parseInt(this.price) + this.tax
-        }
-      },
-      methods: {
-        moneyFormat: function (price) {
-            return "$" + price
-        }
-      }
-
-    });
-    </script>
 
   </body>
 
